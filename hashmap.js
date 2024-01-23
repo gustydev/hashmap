@@ -50,6 +50,26 @@ class HashMap {
     })
     return pairs;
   }
+  keys() {
+    const keysArray = [];
+    this.entries().forEach((entry) => {
+      keysArray.push(entry[0]);
+    })
+    return keysArray;
+  }
+  values() {
+    const valuesArray = [];
+    this.entries().forEach((entry) => {
+      valuesArray.push(entry[1]);
+    })
+    return valuesArray;
+  }
+  length() {
+    return this.entries().length;
+  }
+  has(key) {
+    return (this.keys().includes(key));
+  }
 }
 
 const test = new HashMap();
@@ -57,5 +77,7 @@ test.set('test', 'nananananana')
 test.set('Banana', 'Froot')
 test.set('Banana', 'fruity')
 
-console.log(test)
 console.log(test.entries());
+console.log(test.length())
+console.log(test.has('test'))
+console.log(test.has('pingas'))
