@@ -98,14 +98,3 @@ class HashMap {
     return result;
   }
 }
-
-const test = new HashMap();
-test.set('test', 'nananananana')
-test.set('Banana', 'Froot')
-test.set('Banana', 'fruity')
-
-// console.log(test.buckets)
-console.log(test.entries())
-console.log(test.remove('test'))
-console.log(test.entries())
-console.log(test.remove('GSDGDFHSDFHDSJHSF'))
