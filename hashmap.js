@@ -79,6 +79,24 @@ class HashMap {
       bucket.headNode = null;
     })
   }
+  remove(key) {
+    let result = false;
+    this.buckets.forEach((bucket) => {
+      if (bucket.headNode !== null) {
+        let currentNode = bucket.headNode;
+        while (currentNode !== null) {
+          if (currentNode.value.key === key) {
+            const removedEntry = currentNode.value;
+            const removedIndex = bucket.find(removedEntry);
+            bucket.removeAt(removedIndex);
+            result = true;
+          }
+          currentNode = currentNode.next;
+        }
+      }
+    })
+    return result;
+  }
 }
 
 const test = new HashMap();
@@ -87,5 +105,7 @@ test.set('Banana', 'Froot')
 test.set('Banana', 'fruity')
 
 // console.log(test.buckets)
+console.log(test.entries())
 console.log(test.remove('test'))
-// console.log(test.entries())
+console.log(test.entries())
+console.log(test.remove('GSDGDFHSDFHDSJHSF'))
