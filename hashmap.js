@@ -36,6 +36,20 @@ class HashMap {
       currBucket.next = entry;
     }
   }
+  entries() {
+    const pairs = [];
+    this.buckets.forEach((bucket) => {
+      let currentNode = bucket.headNode;
+      if (currentNode !== null) {
+        pairs.push([currentNode.value.key, currentNode.value.value]);
+        while (currentNode.next !== null) {
+          currentNode = currentNode.next;
+          pairs.push([currentNode.value.key, currentNode.value.value])
+        }
+      }
+    })
+    return pairs;
+  }
 }
 
 const test = new HashMap();
@@ -44,4 +58,4 @@ test.set('Banana', 'Froot')
 test.set('Banana', 'fruity')
 
 console.log(test)
-console.log(test.buckets[5])
+console.log(test.entries());
