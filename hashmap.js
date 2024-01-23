@@ -70,6 +70,15 @@ class HashMap {
   has(key) {
     return (this.keys().includes(key));
   }
+  get(key) {
+    const search = this.entries().find((e) => e[0] === key);
+    if (!search) { return null } else { return search[1] }
+  }
+  clear() {
+    this.buckets.forEach((bucket) => {
+      bucket.headNode = null;
+    })
+  }
 }
 
 const test = new HashMap();
@@ -77,7 +86,6 @@ test.set('test', 'nananananana')
 test.set('Banana', 'Froot')
 test.set('Banana', 'fruity')
 
-console.log(test.entries());
-console.log(test.length())
-console.log(test.has('test'))
-console.log(test.has('pingas'))
+// console.log(test.buckets)
+console.log(test.remove('test'))
+// console.log(test.entries())
