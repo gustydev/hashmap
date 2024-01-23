@@ -21,19 +21,27 @@ class HashMap {
     if (bucket.headNode !== null) {
       filledBuckets += 1;
       }
-    });
+    })
     if (filledBuckets / this.buckets.length > 0.75) { // If larger than growth factor
       for (let i = 0; i < this.buckets.length; i++) { // Double amount of buckets
         this.buckets.push(new LinkedList());
       }
     }
-    const bucket = new Node();
-    bucket.value = {key: value};
-    this.buckets[this.hash(key) % (this.buckets.length)].headNode = bucket;
+    const entry = new Node({key, value});
+    const index = this.hash(key) % (this.buckets.length);
+    const currBucket = this.buckets[index].headNode;
+    if (currBucket === null) {
+      this.buckets[index].headNode = entry;
+    } else {
+      currBucket.next = entry;
+    }
   }
 }
 
 const test = new HashMap();
 test.set('test', 'nananananana')
 test.set('Banana', 'Froot')
+test.set('Banana', 'fruity')
+
 console.log(test)
+console.log(test.buckets[5])
