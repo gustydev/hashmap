@@ -1,8 +1,11 @@
 import { Node, LinkedList } from "./node_modules/linkedlist-gusty/linkedList.js";
-console.log(Node, LinkedList)
+
 class HashMap {
     constructor() {
-        
+        this.buckets = [];
+        for (let i = 0; i < 16; i++) {
+          this.buckets.push(new LinkedList());
+        }
     }
     hash(string) {
         let hashCode = 0;
@@ -15,5 +18,4 @@ class HashMap {
 }
 
 const test = new HashMap();
-console.log(test.hash('goblin'))
-console.log(test.hash('Goblin'))
+console.log(test)
