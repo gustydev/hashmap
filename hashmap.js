@@ -16,24 +16,23 @@ class HashMap {
     return hashCode;
   }
   set(key, value) {
-    let filledBuckets = 0;
-    this.buckets.forEach((bucket) => {
-    if (bucket.headNode !== null) {
-      filledBuckets += 1;
-      }
-    })
-    if (filledBuckets / this.buckets.length > 0.75) { // If larger than growth factor
-      for (let i = 0; i < this.buckets.length; i++) { // Double amount of buckets
+    const entryLength = this.length();
+    const bucketLength = this.buckets.length;
+    if (entryLength / bucketLength > 0.75) { // If larger than growth factor
+      for (let i = 0; i < bucketLength; i++) { // Double amount of buckets
         this.buckets.push(new LinkedList());
       }
     }
     const entry = new Node({key, value});
     const index = this.hash(key) % (this.buckets.length);
-    const currBucket = this.buckets[index].headNode;
-    if (currBucket === null) {
+    let currentNode = this.buckets[index].headNode;
+    if (currentNode === null) {
       this.buckets[index].headNode = entry;
     } else {
-      currBucket.next = entry;
+      while (currentNode.next !== null) {
+        currentNode = currentNode.next;
+      }
+      currentNode.next = entry;
     }
   }
   entries() {
@@ -98,3 +97,40 @@ class HashMap {
     return result;
   }
 }
+
+const test = new HashMap();
+test.set('1', 'a')
+test.set('2', 'b')
+test.set('3', 'c')
+test.set('4', 'd')
+test.set('5', 'e')
+test.set('6', 'f')
+test.set('7', 'g')
+test.set('8', 'h')
+test.set('9', 'i')
+test.set('10', 'j')
+test.set('11', 'k')
+test.set('12', 'l')
+test.set('13', 'm')
+test.set('14', 'n')
+test.set('15', 'o')
+test.set('16', 'p')
+test.set('17', 'q')
+test.set('18', 'r')
+test.set('19', 's')
+test.set('20', 't')
+test.set('21', 'u')
+test.set('22', 'v')
+test.set('23', 'w')
+test.set('24', 'x')
+test.set('25', 'y')
+test.set('26', 'z')
+test.set('27', 'a1')
+test.set('28', 'b1')
+test.set('29', 'c1')
+test.set('30', 'd1')
+
+console.log(test)
+console.log(test.entries())
+console.log(test.length())
+console.log(test.buckets.length)
